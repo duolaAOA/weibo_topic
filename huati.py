@@ -104,7 +104,7 @@ class ChromeDrive(object):
         chrome_options.add_argument('--user-agent={}'.format(random.choice(agents)))
         return chrome_options
 
-    def fetch_cookie(self, login_url, username, password):
+    def _login(self, login_url, username, password):
         if login_url:
             driver = self.start_driver()
         else:
@@ -120,8 +120,11 @@ class ChromeDrive(object):
         driver.find_element_by_id("loginPassword").send_keys(password)
         driver.find_element_by_id("loginAction").click()
         sleep(5)
+        return driver
+
+    def fetch_cookie(self, *args):
+        driver = self._login(*args)
         sina_cookies = driver.get_cookies()
-        driver.close()
 
         cookie_item = {}
         for item in sina_cookies:
