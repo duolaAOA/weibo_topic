@@ -44,8 +44,13 @@
     2. 可选择insert_many函数批量插入
     
     3. 默认使用Chrome, 也可自行更改为其它浏览器驱动
-    
-    
+
+
+- 测试 （鸿茅药酒相关话题）
+
+![](https://github.com/duolaAOA/weibo_topic/blob/master/images/topic_test.png?raw=true)
+    
+
 - weibo_clean.py
 
     1. 在settings.py中配置好 USERNAME 与 PASSWORD， LOGIN_URL_COM
@@ -64,4 +69,3 @@ from weibo_clean import delete
 delete.del_weibo()
 
 ```
-
