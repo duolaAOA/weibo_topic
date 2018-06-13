@@ -26,7 +26,8 @@ class get_Mysql(object):
 
     def create_table(self):
         sql = ''' CREATE TABLE `{tbname}` (
-                  {weibo_id} varchar(25) NOT NULL COMMENT '微博文章id',
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  {weibo_id} varchar(18) NOT NULL COMMENT '微博文章id',
                   {user_id} varchar(25) NOT NULL COMMENT '用户id',
                   {contents} text COMMENT '微博内容',
                   {praise_num} int(10) NOT NULL COMMENT '点赞数',
@@ -34,8 +35,8 @@ class get_Mysql(object):
                   {comment_num} int(8) DEFAULT NULL COMMENT '评论数',
                   {device} varchar(20) DEFAULT NULL COMMENT '微博来自',
                   {create_time} timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '微博发布时间',
-                  PRIMARY KEY (`weibo_id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         '''
         try:
             self.cursor.execute(sql.format(tbname=self.table_name, weibo_id='weibo_id', user_id='user_id', contents='contents', praise_num='praise_num',

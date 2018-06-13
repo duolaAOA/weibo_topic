@@ -5,7 +5,7 @@
 * weibo_clean.py  为对用户所发微博清空
 * 雾霾.xls是测试采集的数据
 
-*  页面只展示100也得内容，实际测试可以拿到199页的内容
+*  页面只展示100页的内容，实际测试可以拿到237页的内容
 ![](https://github.com/duolaAOA/weibo_topic/blob/master/topic.png?raw=true)
 
 
@@ -34,7 +34,7 @@
 
 - settings.py
 
-    1. 在settings文件中对相关参数进行填写配置
+    1. 在settings文件中对驱动路径,数据库参数，微博账户设置即可
 
 
 - huati.py

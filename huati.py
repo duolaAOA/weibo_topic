@@ -120,6 +120,7 @@ class ChromeDrive(object):
         driver.find_element_by_id("loginPassword").send_keys(password)
         driver.find_element_by_id("loginAction").click()
         sleep(5)
+
         return driver
 
     def fetch_cookie(self, *args):
@@ -171,7 +172,7 @@ class FetchSinaTopic(Config):
         html = self.session.get(url=self.topic_base_url.format(parse.quote(self.topic_keyword), start_page),
                                 headers=self.headers, cookies=self.cookies)
 
-        if html.status_code != 200:
+        while html.status_code != 200:
             #   错误重连
             count = 0
             logging.info("错误重试, 第{}次".format(count + 1))
@@ -183,7 +184,8 @@ class FetchSinaTopic(Config):
             else:
                 pass
         else:
-            # sleep(random.randint(1, 3))
+            # 随机睡眠
+            sleep(random.randint(2, 4))
             selector = etree.fromstring(html.content, etree.HTMLParser(encoding='utf-8'))
             all_topic = selector.xpath('//div[contains(@class,"c") and contains(@id,"M")]')
 
@@ -239,7 +241,7 @@ class FetchSinaTopic(Config):
                 data['praise_num'] = praise_num
                 data['transmit_num'] = transmit_num
                 data['comment_num'] = comment_num
-                return data
+                self.mysql.insert(data)
 
     def insert_one(self):
         """单条插入"""
